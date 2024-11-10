@@ -15,7 +15,7 @@ Here is an example of the Tines Sunset list used to track IPs:
 <img src="./images/new_resource_sunset_list.png">
 
 
-Via a web form submission page, a security analyst submits IPs, which are written to an IP sunset list, along with the submission date.  Below, we have an object with two key-value pairs: ip and date
+Via a web form submission page, a security analyst submits IPs, which are written to an IP sunset list, along with the submission date.  Below, we have two objects with two key-value pairs: ip and date
 
 <img src="./images/sunset_list_object.png">
 
