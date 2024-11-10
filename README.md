@@ -19,8 +19,28 @@ Via a web form submission page, a security analyst submits IPs, which are writte
 
 <img src="./images/sunset_list_object.png">
 
+Then, a series of actions adds the IP to the sunset list and creates the IP shun list that is posted to the S3 bucket:
 
-Then, a series of actions create an IP shun list from the sunset list.  By a Tines AWS HTTP REST API call, the Tines workflow pushes the IP shun list to the S3 bucket.  Then, another action, calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource.  The MD5 hash file is pushed to the S3 bucket.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
+<img src="./images/Append_Series_of_Actions.png">
+
+We used the Tines object function to create the IP object (Append Date Event Transform action):
+
+<img src="./images/append_IP_object-1.png">
+
+Then, a Tines Append Element to a resource action adds the IP object to the sunset list:
+
+<img src="./images/append_IP_object-2.png">
+
+After adding the IPs to the sunset list, a series of actions create an IP shun list from the sunset list. 
+
+First actions formats the IP sunset list, so each IP address is on a single line:
+
+<img src="./images/">
+
+<img src="./images/clean_up_ip_txt_action.png">
+
+
+ By a Tines AWS HTTP REST API call, the Tines workflow pushes the IP shun list to the S3 bucket.  Then, another action, calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource.  The MD5 hash file is pushed to the S3 bucket.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
 
 For sunsetting IPs, we had another series of actions which filtered out stale IP addresses.  Then, the next series of actions created an updated IP shun list and MD5 hash files which were posted to the S3 bucket.   In a few weeks, we were able to submit 
 
@@ -29,4 +49,5 @@ For sunsetting IPs, we had another series of actions which filtered out stale IP
 - [Tines Object Function](https://www.tines.com/docs/formulas/functions/object/)
 - [Tines MD5 Function](https://www.tines.com/docs/formulas/functions/md5/)
 - [Tines Append Function](https://www.tines.com/docs/formulas/functions/append/)
+- [Tines Append Element to Resource](https://www.tines.com/api/resources/append-element/)
 - [Tines Community Edition](https://www.tines.com/pricing/)
