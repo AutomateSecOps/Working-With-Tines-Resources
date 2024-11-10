@@ -50,13 +50,14 @@ Then, the next action updates a Tines Resource, called ipshun_txt, with the text
  <img src="./images/HTTP_Action_S3_Put_Object.png">
  
 The next action calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource, md5_txt.  
- <img src="./images/calculate_hash_action.png">
-  <img src="./images/update_md5_hash_resource.png">
+<img src="./images/calculate_hash_action.png">
+<img src="./images/update_md5_hash_resource.png">
 
 The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request action similar to the IP shun action.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
 ## Sunsetting IP Addresses
 For sunsetting IPs, we had another series of actions which filtered out stale IP addresses.
 
+<img src="./images/sunset_lP_list_series_actions.png">
 
  Then, the next series of actions created an updated IP shun list and MD5 hash files which were posted to the S3 bucket.   In a few weeks, we were able to submit 
 
