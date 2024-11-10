@@ -46,10 +46,10 @@ Then, the next action updates a Tines Resource, called ipshun_txt, with the text
 
 <img src="./images/update_ip_shun_list_resource.png">
 
- By a Tines HTTP Request action, the Tines workflow posts the IP shun list to the S3 bucket. In the below example, we see other uses for Tines Resources such as the name of the S3 bucket and the file name of the IP shun list.
+ By a Tines HTTP Request action, the Tines workflow posts the IP shun list to the S3 bucket. In the below example, we see another use for Tines Resources such as the name of the S3 bucket and the file name of the IP shun list.
  <img src="./images/HTTP_Action_S3_Put_Object.png">
  
-The next action calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource.  
+The next action calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource, md5_txt.  
  <img src="./images/calculate_hash_action.png">
   <img src="./images/update_md5_hash_resource.png">
 
