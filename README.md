@@ -58,10 +58,10 @@ The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request actio
 For sunsetting IPs, we had another series of actions which filtered out stale IP addresses.
 
 <img src="./images/sunset_lP_list_series_actions.png">
-For the IOC decay value, we used 21 days, so any IP address submitted 21 or more days ago was filtered.
+For the IOC decay value, we used 21 days, so any IP address submitted 21 or more days ago is filtered.
 <img src="./images/Filter_Function_Sunset_IPs.png">
 
-Then, the next series of actions created an updated IP shun list and MD5 hash files which were posted to the S3 bucket.   
+Then, the next series of actions create an updated IP shun list and MD5 hash files which are posted to the S3 bucket.   
 
 ## What happens when the IP Sunset List is Empty?
 If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array.  So, I had to build the following trigger:
