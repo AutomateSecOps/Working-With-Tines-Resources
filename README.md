@@ -58,8 +58,29 @@ The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request actio
 For sunsetting IPs, we had another series of actions which filtered out stale IP addresses.
 
 <img src="./images/sunset_lP_list_series_actions.png">
+For the IOC decay value, we used 21 days, so any IP address submitted 21 or more days ago was filtered.
+<img src="./images/Filter_Function_Sunset_IPs.png">
 
- Then, the next series of actions created an updated IP shun list and MD5 hash files which were posted to the S3 bucket.   In a few weeks, we were able to submit 
+Then, the next series of actions created an updated IP shun list and MD5 hash files which were posted to the S3 bucket.   
+
+## What happens when the IP Sunset List is Empty?
+If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array.  So, I had to build the following trigger:
+<img src="./images/IP_Sunset_empty_Trigger.png">
+
+The next action purges the IP sunset list:
+<img src="./images/Purge_IP_Sunset_List.png">
+
+Then, the empty IP Shun list is posted to the S3 bucket along with the MD5 hash file:
+<img src="./images/Post_Empty_Sunset_List_S3.png">
+
+I hope you found this useful.
+
+Tines Resources provides flexibility in building out workflows.
+
+Once you start automating, you cannot stop!
+Happy Building.
+
+Tom
 
 ## Tines Documenation
 - [Tines Resources](https://www.tines.com/docs/resources/)
@@ -68,4 +89,8 @@ For sunsetting IPs, we had another series of actions which filtered out stale IP
 - [Tines Append Function](https://www.tines.com/docs/formulas/functions/append/)
 - [Tines Append Element to Resource](https://www.tines.com/api/resources/append-element/)
 - [Tines Update a Resource](https://www.tines.com/api/resources/update/)
+- [Tines Filter Function](https://www.tines.com/docs/formulas/functions/filter/)
+- [Tines Lambda Function](https://www.tines.com/docs/formulas/functions/lambda/)
 - [Tines Community Edition](https://www.tines.com/pricing/)
+
+[Previous Blog](https://automatesecops.github.io/Tines-Pagination/)
