@@ -18,7 +18,7 @@ Here is an example of the Tines Resource, a sunset list used to track IPs:
 
 Via a web form submission page, a security analyst submits IPs to be shunned.
 
-Then, a series of actions creates the IP object, appends the IP object to the sunset list, and creates the IP shun list that is posted to the S3 bucket:
+Then, a series of actions creates the IP object, appends it to the sunset list, and generates the IP shun list that is posted to the S3 bucket:
 
 <img src="./images/Append_Series_of_Actions.png">
 
