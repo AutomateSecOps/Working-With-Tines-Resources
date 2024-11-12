@@ -26,9 +26,7 @@ The first action creates the IP object by appending the date along with the subm
 
 <img src="./images/append_IP_object-1.png">
  
- The IPs are written to an IP sunset list, along with the submission date. 
-
- Then, a Tines Append Element to a resource action adds the IP object to the sunset list:
+ The IPs are written to an IP sunset list, by a Tines Append Element to a Resource action:
 
 <img src="./images/append_IP_object-2.png">
 
@@ -36,35 +34,34 @@ The first action creates the IP object by appending the date along with the subm
 
  <img src="./images/sunset_list_object.png">
 
-After adding the IPs to the sunset list, a series of actions create an IP shun list from the sunset list. 
+After adding the IPs to the sunset list, a series of actions creates an IP shun list from the sunset list. 
 
 This action formats the IP sunset list, so each IP address is on a single line, and outputs the results in text format:
 <img src="./images/clean_up_ip_txt_action.png">
 
 Then, the next action updates a Tines Resource, called ipshun_txt, with the text output of the previous action:
 
-
 <img src="./images/update_ip_shun_list_resource.png">
 
- By a Tines HTTP Request action, the Tines workflow posts the IP shun list to the S3 bucket. In the below example, we see another use for Tines Resources such as the name of the S3 bucket and the file name of the IP shun list.
+ By a Tines HTTP Request action, the Tines workflow posts the IP shun list to the S3 bucket. In the below example, there is another use for Tines Resources such as the name of the S3 bucket and the file name of the IP shun list.
  <img src="./images/HTTP_Action_S3_Put_Object.png">
  
 The next action calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource, md5_txt.  
 <img src="./images/calculate_hash_action.png">
 <img src="./images/update_md5_hash_resource.png">
 
-The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request action similar to the IP shun action.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
+The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request action similar to the posting of IP shun list.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
 ## Sunsetting IP Addresses
-For sunsetting IPs, we had another series of actions which filtered out stale IP addresses.
+For sunsetting IPs, there is another series of actions which filters out stale IP addresses.
 
 <img src="./images/sunset_lP_list_series_actions.png">
-For the IOC decay value, we used 21 days, so any IP address submitted 21 or more days ago is filtered.
+For the IOC decay value, we use 21 days, so any IP address submitted 21 or more days ago is filtered.
 <img src="./images/Filter_Function_Sunset_IPs.png">
 
-Then, the next series of actions create an updated IP shun list and MD5 hash files which are posted to the S3 bucket.   
+Then, the next series of actions creates an updated IP shun list and MD5 hash files which are posted to the S3 bucket.   
 
 ## What happens when the IP Sunset List is Empty?
-If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array.  So, I had to build the following trigger:
+If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array. I had to build the following trigger to avoid getting an error when updating a text resource:
 <img src="./images/IP_Sunset_empty_Trigger.png">
 
 The next action purges the IP sunset list:
@@ -73,9 +70,9 @@ The next action purges the IP sunset list:
 Then, the empty IP Shun list is posted to the S3 bucket along with the MD5 hash file:
 <img src="./images/Post_Empty_Sunset_List_S3.png">
 
-I hope you found this useful.
-
 Tines Resources provides flexibility in building out workflows.
+
+I hope you found this useful.
 
 Once you start automating, you cannot stop!
 Happy Building.
