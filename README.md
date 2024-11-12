@@ -52,16 +52,16 @@ The next action calculates the MD5 hash of the IP shun file, which gets written 
 
 The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request action similar to the posting of IP shun list.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
 ## Sunsetting IP Addresses
-For sunsetting IPs, there is another series of actions which filters out stale IP addresses.
+For sunsetting IPs, there is another series of actions which filter out stale IP addresses.
 
 <img src="./images/sunset_lP_list_series_actions.png">
-For the IOC decay value, we use 21 days, so any IP address submitted 21 or more days ago is filtered.
+In the Prune IP sunset action, any IP address submitted 21 or more days ago is filtered.
 <img src="./images/Filter_Function_Sunset_IPs.png">
 
 Then, the next series of actions creates an updated IP shun list and MD5 hash files which are posted to the S3 bucket.   
 
 ## What happens when the IP Sunset List is Empty?
-If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array. I had to build the following trigger to avoid getting an error when updating a text resource:
+If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array. The following trigger checks to see if the array is empty in order to avoid getting an error when updating a text resource:
 <img src="./images/IP_Sunset_empty_Trigger.png">
 
 The next action purges the IP sunset list:
