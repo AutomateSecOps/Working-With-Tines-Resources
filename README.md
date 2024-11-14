@@ -48,6 +48,7 @@ Then, the next action updates a Tines Resource, called ipshun_txt, with the text
  
 The next action calculates the MD5 hash of the IP shun file, which gets written to another Tines Resource, md5_txt.  
 <img src="./images/calculate_hash_action.png">
+
 <img src="./images/update_md5_hash_resource.png">
 
 The MD5 hash file is pushed to the S3 bucket, using the Tines HTTP Request action similar to the posting of IP shun list.  Both the IP Shun List and MD5 hash files are consumed by the NGFW custom intelligence feed.
@@ -64,13 +65,14 @@ Then, the next series of actions creates an updated IP shun list and MD5 hash fi
 If all IPs are removed from the sunset list, the Update IP Sunset List action produces an empty array. The following trigger checks to see if the array is empty in order to avoid getting an error when updating a text resource:
 <img src="./images/IP_Sunset_empty_Trigger.png">
 
-The next action purges the IP sunset list:
+The next action purges the IP sunset list by inserting a blank array:
+
 <img src="./images/Purge_IP_Sunset_List.png">
 
 Then, the empty IP Shun list is posted to the S3 bucket along with the MD5 hash file:
 <img src="./images/Post_Empty_Sunset_List_S3.png">
 
-Tines Resources provides flexibility in building out workflows.
+In short, Tines Resources provides flexibility in building out workflows.
 
 I hope you found this useful.
 
