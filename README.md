@@ -92,4 +92,4 @@ Tom
 - [Tines Lambda Function](https://www.tines.com/docs/formulas/functions/lambda/)
 - [Tines Community Edition](https://www.tines.com/pricing/)
 
-[Previous Blog](https://automatesecops.github.io/Tines-Pagination/)
+[Previous Blog](https://automatesecops.github.io/Tines-Pagination/)                 [Next Blog](https://ioc-decay.automatesecops.com/)
